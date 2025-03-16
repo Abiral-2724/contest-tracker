@@ -49,6 +49,13 @@ cd frontend
 npm install
 npm run dev
 ```
+4. For login as admin
+```bash
+Email = admin@gmail.com
+Password = 123456
+```
+
+
 ## Component: HomePage
 
 The HomePage component is the main interface of the application. It:
