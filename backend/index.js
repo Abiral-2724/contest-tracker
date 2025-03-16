@@ -96,6 +96,11 @@ app.post('/api/admin/contests/solution', async (req, res) => {
   fetchAllContests().catch(err => console.error('Initial contest fetch error:', err));
   
 
+  app.use(express.static(path.join(_dirname ,"/frontend/dist")))
+  app.get('*' ,(req,res) => {
+    res.sendFile(path.resolve(_dirname ,"frontend" ,"dist" ,"index.html"))
+  })
+
 // Start server
 app.listen(PORT, () => {
     connectDB();
