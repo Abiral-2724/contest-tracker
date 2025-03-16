@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-const ReminderForm = ({ onSubmit, initialValues }) => {
+const ReminderForm = ({ onSubmit, initialValues, isSubmitting }) => {
   const [email, setEmail] = useState(initialValues?.email || '');
   const [phone, setPhone] = useState(initialValues?.phone || '');
   const [reminderType, setReminderType] = useState(initialValues?.reminderPreferences?.reminderType || 'email');
@@ -30,37 +30,38 @@ const ReminderForm = ({ onSubmit, initialValues }) => {
   };
   
   return (
-    <form onSubmit={handleSubmit} className="space-y-4">
-      <div>
-        <label className="block text-sm font-medium text-gray-700 mb-1">Email</label>
+    <div className=''>
+    <form onSubmit={handleSubmit} className="space-y-4 rounded-xl">
+      <div >
+        <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Email</label>
         <input
           type="email"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
-          className="w-full px-3 py-2 border rounded-md"
+          className="w-full px-3 py-2 border rounded-md bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 border-gray-300 dark:border-gray-600 focus:ring-blue-500 focus:border-blue-500"
           required
         />
       </div>
       
       {(reminderType === 'sms' || reminderType === 'both') && (
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-1">Phone Number</label>
+          <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Phone Number</label>
           <input
             type="tel"
             value={phone}
             onChange={(e) => setPhone(e.target.value)}
-            className="w-full px-3 py-2 border rounded-md"
+            className="w-full px-3 py-2 border rounded-md bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 border-gray-300 dark:border-gray-600 focus:ring-blue-500 focus:border-blue-500"
             required
           />
         </div>
       )}
       
       <div>
-        <label className="block text-sm font-medium text-gray-700 mb-1">Reminder Type</label>
+        <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Reminder Type</label>
         <select
           value={reminderType}
           onChange={(e) => setReminderType(e.target.value)}
-          className="w-full px-3 py-2 border rounded-md"
+          className="w-full px-3 py-2 border rounded-md bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 border-gray-300 dark:border-gray-600 focus:ring-blue-500 focus:border-blue-500"
         >
           <option value="email">Email</option>
           <option value="sms">SMS</option>
@@ -69,11 +70,11 @@ const ReminderForm = ({ onSubmit, initialValues }) => {
       </div>
       
       <div>
-        <label className="block text-sm font-medium text-gray-700 mb-1">Reminder Time</label>
+        <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Reminder Time</label>
         <select
           value={reminderTime}
           onChange={(e) => setReminderTime(e.target.value)}
-          className="w-full px-3 py-2 border rounded-md"
+          className="w-full px-3 py-2 border rounded-md bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 border-gray-300 dark:border-gray-600 focus:ring-blue-500 focus:border-blue-500"
         >
           <option value="15">15 minutes before</option>
           <option value="30">30 minutes before</option>
@@ -84,15 +85,15 @@ const ReminderForm = ({ onSubmit, initialValues }) => {
       </div>
       
       <div>
-        <label className="block text-sm font-medium text-gray-700 mb-1">Platforms</label>
+        <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Platforms</label>
         <div className="space-y-2">
           {['Codeforces', 'CodeChef', 'LeetCode'].map(platform => (
-            <label key={platform} className="flex items-center">
+            <label key={platform} className="flex items-center text-gray-700 dark:text-gray-300">
               <input
                 type="checkbox"
                 checked={platforms.includes(platform)}
                 onChange={() => handlePlatformToggle(platform)}
-                className="form-checkbox h-4 w-4 mr-2"
+                className="form-checkbox h-4 w-4 mr-2 text-blue-600 dark:text-blue-400 border-gray-300 dark:border-gray-600 rounded focus:ring-blue-500"
               />
               <span>{platform}</span>
             </label>
@@ -102,11 +103,13 @@ const ReminderForm = ({ onSubmit, initialValues }) => {
       
       <button
         type="submit"
-        className="w-full bg-blue-600 text-white py-2 px-4 rounded-md hover:bg-blue-700"
+        disabled={isSubmitting}
+        className="w-full bg-blue-600 dark:bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-700 dark:hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 dark:focus:ring-offset-gray-800 disabled:opacity-50"
       >
-        Save Reminder Preferences
+        {isSubmitting ? 'Saving...' : 'Save Reminder Preferences'}
       </button>
     </form>
+    </div>
   );
 };
 
