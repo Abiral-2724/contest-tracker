@@ -1,7 +1,7 @@
 // src/services/api.js
 import axios from 'axios';
 
-const API_URL = 'http://localhost:8000/api';
+const API_URL = 'https://contest-tracker-l9vc.onrender.com/api';
 
 const api = axios.create({
   baseURL: API_URL,
@@ -24,7 +24,7 @@ export const removeBookmark = (userId, contestId) => api.delete(`/users/${userId
 export const getUserBookmarks = (userId) => api.get(`/users/${userId}/bookmarks`);
 
 export const updateReminderPreferences = async (userId, reminderPreferences) => {
-    const response = await fetch(`http://localhost:8000/api/users/${userId}/reminders`, {
+    const response = await fetch(`https://contest-tracker-l9vc.onrender.com/api/users/${userId}/reminders`, {
       method: 'PATCH',
       headers: {
         'Content-Type': 'application/json',

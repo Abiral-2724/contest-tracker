@@ -39,7 +39,7 @@ const SignupPage = () => {
     }
 
     try {
-      const response = await axios.post('http://localhost:8000/api/users/signup', formData);
+      const response = await axios.post('https://contest-tracker-l9vc.onrender.com/api/users/signup', formData);
       
       if (response.data.success) {
         // Redirect to login page after successful signup
