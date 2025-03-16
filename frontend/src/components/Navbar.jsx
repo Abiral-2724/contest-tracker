@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { User, LogOut, LogIn, UserPlus, Moon, Sun } from 'lucide-react';
+import { User, LogOut, LogIn, UserPlus, Moon, Sun, Menu, X } from 'lucide-react';
 import { Button } from "@/components/ui/button";
 
 const Navbar = () => {
   const location = useLocation();
   const [user, setUser] = useState(null);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [theme, setTheme] = useState('light');
   const [isLoaded, setIsLoaded] = useState(false);
 
@@ -27,6 +28,9 @@ const Navbar = () => {
     
     // Mark component as loaded
     setIsLoaded(true);
+    
+    // Close mobile menu when location changes
+    setIsMobileMenuOpen(false);
   }, [location]); // Re-run when location changes
 
   useEffect(() => {
@@ -83,6 +87,10 @@ const Navbar = () => {
     setIsDropdownOpen(!isDropdownOpen);
   };
 
+  const toggleMobileMenu = () => {
+    setIsMobileMenuOpen(!isMobileMenuOpen);
+  };
+
   // Check if the user is an admin
   const isAdmin = user && user.email === 'admin@gmail.com';
 
@@ -99,6 +107,7 @@ const Navbar = () => {
             <div className="flex-shrink-0 flex items-center">
               <Link to="/" className="text-xl font-bold text-blue-600 dark:text-blue-400">Contest Tracker</Link>
             </div>
+            {/* Desktop Navigation */}
             <div className="hidden sm:ml-6 sm:flex sm:space-x-8">
               <Link
                 to="/"
@@ -137,7 +146,25 @@ const Navbar = () => {
           </div>
 
           {/* Theme Toggle and User Authentication Section */}
-          <div className="flex items-center space-x-4">
+          <div className="flex items-center space-x-2">
+            {/* Mobile menu button */}
+            <div className="flex items-center sm:hidden">
+              <button
+                type="button"
+                className="inline-flex items-center justify-center p-2 rounded-md text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-300 focus:outline-none"
+                aria-controls="mobile-menu"
+                aria-expanded={isMobileMenuOpen}
+                onClick={toggleMobileMenu}
+              >
+                <span className="sr-only">{isMobileMenuOpen ? 'Close menu' : 'Open menu'}</span>
+                {isMobileMenuOpen ? (
+                  <X className="h-6 w-6" />
+                ) : (
+                  <Menu className="h-6 w-6" />
+                )}
+              </button>
+            </div>
+            
             {/* Theme Toggle Button */}
             {theme === "dark" ? (
               <Button
@@ -197,7 +224,7 @@ const Navbar = () => {
                 )}
               </div>
             ) : (
-              <div className="flex space-x-4">
+              <div className="hidden sm:flex sm:space-x-4">
                 <Link
                   to="/login"
                   className="inline-flex items-center px-3 py-2 border border-transparent text-sm font-medium rounded-md text-blue-600 dark:text-blue-400 bg-white dark:bg-gray-800 hover:bg-blue-50 dark:hover:bg-gray-700"
@@ -217,6 +244,71 @@ const Navbar = () => {
           </div>
         </div>
       </div>
+
+      {/* Mobile menu, show/hide based on menu state */}
+      {isMobileMenuOpen && (
+        <div className="sm:hidden" id="mobile-menu">
+          <div className="pt-2 pb-3 space-y-1">
+            <Link
+              to="/"
+              className={`block pl-3 pr-4 py-2 border-l-4 text-base font-medium ${
+                isActive('/')
+                  ? 'border-blue-500 text-blue-700 dark:text-blue-400 bg-blue-50 dark:bg-gray-800'
+                  : 'border-transparent text-gray-600 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700'
+              }`}
+              onClick={() => setIsMobileMenuOpen(false)}
+            >
+              Home
+            </Link>
+            <Link
+              to="/reminders"
+              className={`block pl-3 pr-4 py-2 border-l-4 text-base font-medium ${
+                isActive('/reminders')
+                  ? 'border-blue-500 text-blue-700 dark:text-blue-400 bg-blue-50 dark:bg-gray-800'
+                  : 'border-transparent text-gray-600 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700'
+              }`}
+              onClick={() => setIsMobileMenuOpen(false)}
+            >
+              Reminders
+            </Link>
+            {isAdmin && (
+              <Link
+                to="/admin"
+                className={`block pl-3 pr-4 py-2 border-l-4 text-base font-medium ${
+                  isActive('/admin')
+                    ? 'border-blue-500 text-blue-700 dark:text-blue-400 bg-blue-50 dark:bg-gray-800'
+                    : 'border-transparent text-gray-600 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700'
+                }`}
+                onClick={() => setIsMobileMenuOpen(false)}
+              >
+                Admin
+              </Link>
+            )}
+            
+            {/* Mobile login/register buttons */}
+            {!user && (
+              <div className="mt-3 space-y-2 px-3">
+                <Link
+                  to="/login"
+                  className="w-full flex items-center justify-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-blue-600 dark:text-blue-400 bg-white dark:bg-gray-800 hover:bg-blue-50 dark:hover:bg-gray-700"
+                  onClick={() => setIsMobileMenuOpen(false)}
+                >
+                  <LogIn className="h-4 w-4 mr-2" />
+                  Login
+                </Link>
+                <Link
+                  to="/register"
+                  className="w-full flex items-center justify-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700 dark:bg-blue-500 dark:hover:bg-blue-600"
+                  onClick={() => setIsMobileMenuOpen(false)}
+                >
+                  <UserPlus className="h-4 w-4 mr-2" />
+                  Register
+                </Link>
+              </div>
+            )}
+          </div>
+        </div>
+      )}
     </nav>
   );
 };
