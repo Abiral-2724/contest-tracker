@@ -41,7 +41,7 @@ function App() {
             <Route path="/reminders" element={<ReminderPage user={user} setUser={setUser} />} />
             <Route path="/admin" element={<AdminPage />} />
             <Route path="/login" element={<LoginPage />} />
-        <Route path="/signup" element={<SignupPage />} />
+        <Route path="/register" element={<SignupPage />} />
           </Routes>
         </main>
       </div>
