@@ -344,16 +344,7 @@ const HomePage = () => {
             <p className="text-xl text-blue-100 mb-8 leading-relaxed">
               Stay updated with the latest coding competitions from your favorite platforms. Never miss a challenge again.
             </p>
-            {!user && (
-              <div className="flex flex-wrap gap-4">
-                <Link to="/login" className="bg-white text-indigo-600 hover:text-indigo-800 font-medium px-6 py-3 rounded-lg shadow-lg hover:shadow-xl transition duration-200 transform hover:-translate-y-1">
-                  Sign In
-                </Link>
-                <Link to="/register" className="bg-transparent text-white border-2 border-white hover:bg-white/10 font-medium px-6 py-3 rounded-lg transition duration-200">
-                  Create Account
-                </Link>
-              </div>
-            )}
+            
           </div>
         </div>
       </div>

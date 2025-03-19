@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { User, LogOut, LogIn, UserPlus, Moon, Sun, Menu, X, Trophy } from 'lucide-react';
 import { Button } from "@/components/ui/button";
 
@@ -10,9 +10,11 @@ const Navbar = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [theme, setTheme] = useState('light');
   const [isLoaded, setIsLoaded] = useState(false);
+  const navigate = useNavigate() ;
 
   // This effect will run whenever the location changes (e.g., after login redirects to home)
   useEffect(() => {
+  
     // Check if user exists in localStorage
     const storedUser = localStorage.getItem('user');
     if (storedUser) {
@@ -81,6 +83,7 @@ const Navbar = () => {
     setUser(null);
     setIsDropdownOpen(false);
     // You might want to redirect to home page or login page here
+    navigate('/login') ;
   };
 
   const toggleDropdown = () => {
