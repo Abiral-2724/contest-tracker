@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { User, LogOut, LogIn, UserPlus, Moon, Sun, Menu, X } from 'lucide-react';
+import { User, LogOut, LogIn, UserPlus, Moon, Sun, Menu, X, Trophy } from 'lucide-react';
 import { Button } from "@/components/ui/button";
 
 const Navbar = () => {
@@ -105,7 +105,11 @@ const Navbar = () => {
         <div className="flex justify-between h-16">
           <div className="flex">
             <div className="flex-shrink-0 flex items-center">
-              <Link to="/" className="text-xl font-bold text-blue-600 dark:text-blue-400">Contest Tracker</Link>
+            <Link to="/" className="text-xl font-bold text-blue-600 dark:text-blue-400 flex items-center gap-2">
+  <Trophy />
+  Contest Tracker
+</Link>
+
             </div>
             {/* Desktop Navigation */}
             <div className="hidden sm:ml-6 sm:flex sm:space-x-8">

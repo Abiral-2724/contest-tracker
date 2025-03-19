@@ -7,6 +7,7 @@ import Navbar from './components/Navbar';
 import './index.css';
 import LoginPage from './pages/LoginPage';
 import SignupPage from './pages/SignupPage';
+import AboutPage from './pages/About';
 
 function App() {
   const [user, setUser] = useState(null);
@@ -42,6 +43,7 @@ function App() {
             <Route path="/admin" element={<AdminPage />} />
             <Route path="/login" element={<LoginPage />} />
         <Route path="/register" element={<SignupPage />} />
+        <Route path="/about" element={<AboutPage></AboutPage>} />
           </Routes>
         </main>
       </div>
