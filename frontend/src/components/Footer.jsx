@@ -20,7 +20,7 @@ const Footer = () => {
           
           <div className="flex space-x-4">
             <Button variant="link" size="sm" className="text-slate-600 hover:text-slate-900">
-              About
+              <a href="/about">About</a>
             </Button>
             <Button variant="link" size="sm" className="text-slate-600 hover:text-slate-900">
               Contact

@@ -42,3 +42,90 @@ code {
 html.dark body {
   @apply bg-gray-900 text-gray-100;
 }
+
+@layer base {
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 222.2 84% 4.9%;
+    --card: 0 0% 100%;
+    --card-foreground: 222.2 84% 4.9%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 222.2 84% 4.9%;
+    --primary: 221 70% 45%;
+    --primary-foreground: 210 40% 98%;
+    --secondary: 210 40% 96.1%;
+    --secondary-foreground: 222.2 47.4% 11.2%;
+    --muted: 210 40% 96.1%;
+    --muted-foreground: 215.4 16.3% 46.9%;
+    --accent: 210 40% 96.1%;
+    --accent-foreground: 222.2 47.4% 11.2%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 210 40% 98%;
+    --border: 214.3 31.8% 91.4%;
+    --input: 214.3 31.8% 91.4%;
+    --ring: 221 70% 45%;
+    --radius: 0.5rem;
+
+    /* Platform specific colors */
+    --codeforces: 217 83% 42%;
+    --leetcode: 39 100% 54%;
+    --atcoder: 262 41% 57%;
+    --codechef: 120 50% 54%;
+  }
+
+  .dark {
+    --background: 222.2 84% 4.9%;
+    --foreground: 210 40% 98%;
+    --card: 222.2 84% 4.9%;
+    --card-foreground: 210 40% 98%;
+    --popover: 222.2 84% 4.9%;
+    --popover-foreground: 210 40% 98%;
+    --primary: 217 83% 42%;
+    --primary-foreground: 210 40% 98%;
+    --secondary: 217.2 32.6% 17.5%;
+    --secondary-foreground: 210 40% 98%;
+    --muted: 217.2 32.6% 17.5%;
+    --muted-foreground: 215 20.2% 65.1%;
+    --accent: 217.2 32.6% 17.5%;
+    --accent-foreground: 210 40% 98%;
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 210 40% 98%;
+    --border: 217.2 32.6% 17.5%;
+    --input: 217.2 32.6% 17.5%;
+    --ring: 224.3 76.3% 48%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+}
+
+/* Platform specific badges */
+.badge-codeforces {
+  @apply bg-transparent text-[#1890ff] border-[#1890ff];
+}
+
+.badge-leetcode {
+  @apply bg-transparent text-[#ffa116] border-[#ffa116];
+}
+
+.badge-atcoder {
+  @apply bg-transparent text-[#6e56cf] border-[#6e56cf];
+}
+
+.badge-codechef {
+  @apply bg-transparent text-[#5cb85c] border-[#5cb85c];
+}
+
+.badge-yukicoder {
+  @apply bg-transparent text-gray-500 border-gray-500;
+}
+
+.countdown {
+  @apply bg-blue-50 text-blue-700 dark:bg-blue-950 dark:text-blue-300 px-4 py-2 rounded-md flex items-center justify-center text-sm;
+}
